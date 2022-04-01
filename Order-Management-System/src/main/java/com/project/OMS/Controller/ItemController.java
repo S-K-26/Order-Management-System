@@ -52,7 +52,7 @@ public class ItemController {
 	@PostMapping("/items/{id}")
 	public String updateItem(@PathVariable Long id,
 			@ModelAttribute("item") Item item,Model model) {
-		//Will get student from database by id
+		//Will get item from database by id
 		Item existingItem = itemServise.getItemById(id);
 		existingItem.setItemId(id);
 		existingItem.setName(item.getName());
