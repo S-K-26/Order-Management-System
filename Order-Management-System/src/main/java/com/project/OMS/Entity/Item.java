@@ -11,12 +11,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+/* 
+@Entity - Used to map Item class to table.
+@ID - Assigned annotation @Id to itemId to set it as Primary Key.
+@GeneratedValue - Auto generates the order Id for each order added
+@Column - Used to assign specific column name to created column.
+@ManyToMany - Since each order can have many items & Each Item can have many orders we have used
+ 			   @ManyToMany to map it in the database.
+*/
+
+
 @Entity
 public class Item {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long id;
+	public int id;
 
 	@Column(name = "Item_Name")
 	private String name;
@@ -37,12 +47,14 @@ public class Item {
 		this.cost = cost;
 	}
 
-	public Long getItemId() {
+	
+
+	public int getId() {
 		return id;
 	}
 
-	public void setItemId(Long itemId) {
-		this.id = itemId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {

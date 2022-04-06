@@ -5,17 +5,26 @@ import java.util.List;
 
 import com.project.OMS.Entity.Order;
 
+//Created Service Class to provide business logic to the application
+
 public interface OrderService {
 	
+	// It will give list of all orders present
 	List<Order> getAllOrders();
-
+	
+	// To save the order.
 	Order saveOrder(Order order);
 	
+	// To get the total cost of the order.
 	String totalCost(String orderId);
 	
-	Order addItemsToOrder(Integer orderId, Long id);
+	// To add items to the order.
+	Order addItemsToOrder(Integer orderId, Integer id);
 	
-	void deleteOrder(String orderId);
+	// To delete the order.
+	void deleteOrder(Integer orderId);
+
+	List<Order> deleteOrders(Integer orderId);
 	
 
 }

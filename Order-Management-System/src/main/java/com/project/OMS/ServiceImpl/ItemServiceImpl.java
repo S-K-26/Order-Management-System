@@ -8,7 +8,15 @@ import org.springframework.stereotype.Service;
 import com.project.OMS.Entity.Item;
 import com.project.OMS.Repositpry.ItemRepository;
 import com.project.OMS.Service.ItemServise;
+/*
+ * ServiceImpl class to implement methods from service class.
+  
+ * @Autowired - Used to inject the object dependency.
 
+ * @Service - The Annotation is used to mark the class as service provider.@Service annotation is 
+   used with classes that provide some business functionalities. Spring context will auto detect 
+   these classes when annotation-based configuration and class path scanning is used.
+ */
 @Service
 public class ItemServiceImpl implements ItemServise{
 	
@@ -28,19 +36,19 @@ public class ItemServiceImpl implements ItemServise{
 	}
 
 	@Override
-	public Item getItemById(Long id) {
+	public Item getItemById(Integer id) {
+		
 		return itemRepository.getById(id);
 	}
 
 	@Override
-	public void deleteItem(Long id) {
+	public void deleteItem(Integer id) {
 		itemRepository.deleteById(id);
 		
 	}
 
 	@Override
 	public Item updateItem(Item item) {
-		// TODO Auto-generated method stub
 		return itemRepository.save(item);
 	}
 

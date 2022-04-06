@@ -5,18 +5,27 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.project.OMS.Entity.Item;
 import com.project.OMS.Entity.Order;
 import com.project.OMS.Repositpry.ItemRepository;
 import com.project.OMS.Repositpry.OrderRepository;
 import com.project.OMS.Service.OrderService;
+/*
+ * ServiceImpl class to implement methods from service class.
+  
+ * @Autowired - Used to inject the object dependency.
+
+ * @Service - The Annotation is used to mark the class as service provider.@Service annotation is 
+   used with classes that provide some business functionalities. Spring context will auto detect 
+   these classes when annotation-based configuration and class path scanning is used.
+ */
 
 @Service
-public class OrderServiceImpl implements OrderService{
-	
+public class OrderServiceImpl implements OrderService {
+
 	@Autowired
 	private OrderRepository orderRepository;
-	
+
 	@Autowired
 	private ItemRepository itemRepository;
 
@@ -31,16 +40,16 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public void deleteOrder(String orderId) {
-		Order order = orderRepository.getById(Integer.parseInt(orderId));
+	public void deleteOrder(Integer orderId) {
+		Order order = orderRepository.getById(orderId);
 		orderRepository.delete(order);
-	
+
 	}
 
 	@Override
-	public Order addItemsToOrder(Integer orderId, Long id) {
+	public Order addItemsToOrder(Integer orderId, Integer id) {
 		Order order = orderRepository.getById(orderId);
-		 com.project.OMS.Entity.Item item = itemRepository.getById(id);
+		Item item = itemRepository.getById(id);
 		item.addOrders(order);
 		order.addItems(item);
 		return orderRepository.save(order);
@@ -48,24 +57,28 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public String totalCost(String orderId) {
-			Order order = orderRepository.getById(Integer.parseInt(orderId));
-			Double cost = 0d;
-			for (com.project.OMS.Entity.Item item : order.getItems()) {
-				cost = cost + item.getCost();
+		Order order = orderRepository.getById(Integer.parseInt(orderId));
+		Double cost = 0d;
+		for (Item item : order.getItems()) {
+			cost = cost + item.getCost();
+		}
+		return String.valueOf(cost);
+	}
+
+	@Override
+	public List<Order> deleteOrders(Integer orderId) {
+		Order order = orderRepository.getById(orderId);
+		List<Item> items = order.getItems();
+		if (items == null) {
+			orderRepository.delete(order);
+		} else {
+			for (Item item : items) {
+				item.removeOrders(order);
 			}
-			return String.valueOf(cost);
+			orderRepository.delete(order);
 		}
 
-		/*
-		 * @Override public List<Order> deleteOrders(String orderId) { Order order =
-		 * orderRepository.getById(Integer.parseInt(orderId));
-		 * List<com.project.OMS.Entity.Item> items = order.getItems(); if (items ==
-		 * null) { orderRepository.delete(order); } else { for
-		 * (com.project.OMS.Entity.Item item : items) { item.removeOrders(order); }
-		 * orderRepository.delete(order); }
-		 * 
-		 * return getAllOrders(); }
-		 */
+		return getAllOrders();
+	}
+
 }
-
-

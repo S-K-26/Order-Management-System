@@ -1,4 +1,4 @@
-package com.project.OMS.ServiceImpl;
+package com.project.OMS.ServiceImplTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.persistence.EntityManager;
@@ -14,7 +14,11 @@ import org.springframework.test.annotation.DirtiesContext;
 import com.project.OMS.Entity.Order;
 import com.project.OMS.Repositpry.OrderRepository;
 import com.project.OMS.Service.OrderService;
-
+/*
+ * @Test - Used to define the certain method is test method.
+ * @DirtiesContest - If a test modifies applicationContext it tells the framework to
+  					 close & recreate the context for later tests.
+ */
 
 @SpringBootTest
 @Transactional
@@ -34,7 +38,7 @@ class OrderServiceImplTest {
 	@Test
 	@DirtiesContext
 	void testAddItemsToOrder() {
-		Order order = orderService.addItemsToOrder(1, 2l);
+		Order order = orderService.addItemsToOrder(1, 2);
 		logger.info("Ordered Items-> {}", order.getItems());
 		assertEquals(1,order.getOrderId());
 	}
@@ -51,8 +55,8 @@ class OrderServiceImplTest {
 	@DirtiesContext
 	@Transactional
 	void totalCost_Test() {
-		orderService.addItemsToOrder(1, 1l);
-		orderService.addItemsToOrder(1, 2l);
+		orderService.addItemsToOrder(1, 1);
+		orderService.addItemsToOrder(1, 2);
 		assertEquals("15000.0", orderService.totalCost("1"));
 	}
 					
