@@ -42,8 +42,9 @@ class OrderServiceTest {
 	@DirtiesContext
 	void addItemsToOrder_Test() {
 		Order order = orderService.addItemsToOrder(1, 2);
+		orderService.addItemsToOrder(1, 1);
 		logger.info("Ordered Items-> {}", order.getItems());
-		assertEquals(1,order.getOrderId());
+		assertEquals(2,order.getItems().size());
 	}
 	
 	@Test
