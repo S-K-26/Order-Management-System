@@ -1,8 +1,6 @@
 package com.project.OMS.Repositpry;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import com.project.OMS.Entity.Item;
 /* 
 * Created ItemRepository Class to provide the mechanism for storage, retrieval, search,

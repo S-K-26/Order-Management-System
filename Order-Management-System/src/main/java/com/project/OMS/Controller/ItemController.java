@@ -30,19 +30,23 @@ public class ItemController {
 	@Autowired
 	private ItemServise itemServise;
 	
-	// handler method to handle list item
+	/*
+	  Handler method to handle list item //Will get all the items from database.
+	 */	
 	@GetMapping("/items")
 	public String listOfItems(Model model) {
 		model.addAttribute("items", itemServise.getAllItems());
 		return "items";
 	}
 	
+	//Handler method to go to item editing page.
 	@GetMapping("/items/edit")
 	public String editPage(Model model) {
 		model.addAttribute("items", itemServise.getAllItems());
 		return "edit";	
 	}
 	
+	// handles Request for adding new item.
 	@GetMapping("/items/new")
 	public String createNewItem(Model model) {
 		Item item = new Item();
@@ -50,12 +54,14 @@ public class ItemController {
 		return "add-item";
 	}
 	
+	// to save added item
 	@PostMapping("/items")
 	public String saveItem(@ModelAttribute("item") Item item) {
 		itemServise.saveItem(item);
 		return "redirect:/items/edit";
 	}
 	
+	// to edit already added item
 	@GetMapping("/items/edit_item/{id}")
 	public String editListOfItems(@PathVariable Integer id,Model model) {
 		model.addAttribute("item",itemServise.getItemById(id));
@@ -79,6 +85,7 @@ public class ItemController {
 		return "redirect:/items/edit";
 	}
 	
+	// to delete the item.
 	@GetMapping("/items/{id}")
 	public String deleteItem(@PathVariable Integer id) {
 		itemServise.deleteItem(id);

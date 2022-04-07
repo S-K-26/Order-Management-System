@@ -12,6 +12,9 @@ public interface OrderService {
 	// It will give list of all orders present
 	List<Order> getAllOrders();
 	
+	// To get Order By Id
+	Order getOrderById(Integer orderId);
+	
 	// To save the order.
 	Order saveOrder(Order order);
 	
@@ -23,8 +26,8 @@ public interface OrderService {
 	
 	// To delete the order.
 	void deleteOrder(Integer orderId);
-
-	List<Order> deleteOrders(Integer orderId);
 	
+	// To delete items from order
+	List<Order> deleteOrders(Integer orderId);	
 
 }

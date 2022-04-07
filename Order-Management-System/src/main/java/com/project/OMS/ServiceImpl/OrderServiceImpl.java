@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.OMS.ResourceNotFoundException;
 import com.project.OMS.Entity.Item;
 import com.project.OMS.Entity.Order;
 import com.project.OMS.Repositpry.ItemRepository;
@@ -44,6 +45,13 @@ public class OrderServiceImpl implements OrderService {
 		Order order = orderRepository.getById(orderId);
 		orderRepository.delete(order);
 
+	}
+	
+	@Override
+	public Order getOrderById(Integer orderId) {
+		orderRepository.findById(orderId).orElseThrow(() ->
+		new ResourceNotFoundException("Order Not Found"));
+		return orderRepository.getById(orderId);
 	}
 
 	@Override

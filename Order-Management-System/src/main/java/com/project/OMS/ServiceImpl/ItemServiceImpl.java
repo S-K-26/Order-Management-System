@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.OMS.ResourceNotFoundException;
 import com.project.OMS.Entity.Item;
 import com.project.OMS.Repositpry.ItemRepository;
 import com.project.OMS.Service.ItemServise;
@@ -37,7 +38,8 @@ public class ItemServiceImpl implements ItemServise{
 
 	@Override
 	public Item getItemById(Integer id) {
-		
+		itemRepository.findById(id).orElseThrow(() ->
+					new ResourceNotFoundException("Item Not Found"));
 		return itemRepository.getById(id);
 	}
 

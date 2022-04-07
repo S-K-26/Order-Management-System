@@ -97,9 +97,16 @@ public class Order {
 	public List<Item> getItems() {
 		return items;
 	}
-
+	
+	/* We have removed the default setter method for item list to have control over
+	  adding orders we don't want to add list of items instead set item  at a time.
+	 */
 	public void addItems(Item items) {
 		this.items.add(items);
+	}
+	
+	public void removeItems(Item items) {
+		this.items.remove(items);
 	}
 
 }

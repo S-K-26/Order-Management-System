@@ -31,12 +31,14 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
+	// to get the list of all orders enlisted in database.
 	@GetMapping("/orders")
 	public String getAllOrders(Model model) {
 		model.addAttribute("orders",orderService.getAllOrders());
 		return "orders";
 	}
 	
+	// to add new orders.
 	@GetMapping("/orders/new")
 	public String createNewOrder(Model model) {
 		Order order =  new Order();
@@ -44,19 +46,21 @@ public class OrderController {
 		return "New-Order";
 	}
 	
+	// to save orders.
 	@PostMapping("/orders")
 	public String saveOrder(@ModelAttribute("order") Order order) {
 		orderService.saveOrder(order);
 		return "redirect:/items";
 	}
 	
+	// to delete order by id.
 	@GetMapping("/orders/{orderId}")
 	public String deleteOrder(@PathVariable String orderId) {
 		orderService.deleteOrder(Integer.parseInt(orderId));
-		System.out.println(orderId);
 		return "redirect:/orders";
 	}
 	
+	// to get total cost of the order.
 	@GetMapping("/orders/cost/{orderId}")
 	public String totalCostOfOrder(@PathVariable String orderId) {
 		return orderService.totalCost(orderId);

@@ -37,17 +37,19 @@ public class Item {
 	@ManyToMany(mappedBy = "items",fetch = FetchType.LAZY)
 	private List<Order> orders = new ArrayList<>();
 	
+	// Default No-Argument Constructor.
 	public Item() {
 
 	}
-
+	
+	// Constructor to accept name & cost.
 	public Item(String name, Double cost) {
 		super();
 		this.name = name;
 		this.cost = cost;
 	}
 
-	
+	// Getters & Setters methods for variables.
 
 	public int getId() {
 		return id;
@@ -76,7 +78,10 @@ public class Item {
 	public List<Order> getOrders() {
 		return orders;
 	}
-
+	
+	/* We have removed the default setter method for order list to have control over
+	  adding orders we don't want to add list of orders instead get one order at a time.
+	 */
 	public void addOrders(Order orders) {
 		this.orders.add(orders);
 	}
