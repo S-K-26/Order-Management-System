@@ -1,4 +1,4 @@
-package com.project.OMS.Controller;
+ package com.project.OMS.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -11,9 +11,8 @@ import com.project.OMS.Entity.Order;
 import com.project.OMS.Repositpry.ItemRepository;
 import com.project.OMS.Repositpry.OrderRepository;
 import com.project.OMS.Service.OrderService;
-/*
+/**
  * ServiceImpl class to implement methods from service class.
-  
  * @Autowired - Used to inject the object dependency.
 
  * @Service - The Annotation is used to mark the class as service provider.@Service annotation is 
